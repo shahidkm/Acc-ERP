@@ -64,7 +64,7 @@ function LoginForm() {
           toast.success(data?.message || 'Login successful!');
           dispatch(resetErrors());
                 if(data.statusCode!="400"){
-          navigate('/register');
+          navigate('/create-purchase');
                 }
         },
         onError: (error) => {
