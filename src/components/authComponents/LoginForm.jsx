@@ -64,7 +64,7 @@ function LoginForm() {
           toast.success(data?.message || 'Login successful!');
           dispatch(resetErrors());
                 if(data.statusCode!="400"){
-          navigate('/create-purchase');
+          navigate('/register');
                 }
         },
         onError: (error) => {
@@ -128,7 +128,7 @@ function LoginForm() {
           Join on the ledger –{' '}
           <span
             className="text-blue-500 font-bold cursor-pointer hover:underline"
-            onClick={() => navigate('/register')}
+            onClick={() => navigate('/create-purchase')}
           >
             Register
           </span>
