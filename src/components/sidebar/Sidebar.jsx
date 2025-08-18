@@ -65,9 +65,9 @@ export default function Sidebar() {
       label: 'Items', 
       subItems: [
         { icon: Plus, label: 'Create Product', href: '#new-transaction', navigate: 'items/create-product' },
-        { icon: Eye, label: 'Category', href: '#all-transactions', navigate: 'items/category' },
-        { icon: Edit, label: 'Product Warehouse', href: '#pending-transactions', navigate: 'items/product-warehouse' },
-        { icon: Archive, label: 'Unit', href: '#transaction-history', navigate: 'items/unit' }
+        { icon: Eye, label: 'Category', href: '#all-transactions', navigate: 'create-product-category' },
+        { icon: Edit, label: 'Product Warehouse', href: '#pending-transactions', navigate: 'create-product-warehouse' },
+        { icon: Archive, label: 'Unit', href: '#transaction-history', navigate: 'create-product-unit' }
       ]
     },
     { 
@@ -82,12 +82,25 @@ export default function Sidebar() {
     },
     { 
       icon: FileText, 
-      label: 'Invoices', 
+      label: 'Sales', 
       subItems: [
-        { icon: Plus, label: 'Create Invoice', href: '#create-invoice', navigate: 'invoices/create' },
-        { icon: Eye, label: 'All Invoices', href: '#all-invoices', navigate: 'invoices/all' },
-        { icon: Edit, label: 'Draft', href: '#draft-invoices', navigate: 'invoices/draft' },
-        { icon: Archive, label: 'Paid', href: '#paid-invoices', navigate: 'invoices/paid' }
+
+         { icon: Archive, label: 'Paid', href: '#paid-invoices', navigate: 'invoices/paid' },
+          { icon: Archive, label: 'Paid', href: '#paid-invoices', navigate: 'invoices/paid' },
+             { icon: Archive, label: 'Paid', href: '#paid-invoices', navigate: 'invoices/paid' },
+      ]
+    },
+        { 
+      icon: FileText, 
+      label: 'Customer', 
+      subItems: [
+       { icon: Plus, label: 'Customers', href: '#create-invoice', navigate: 'create-customer' },
+        { icon: Eye, label: 'Add New Customer', href: '#all-invoices', navigate: '' },
+        { icon: Edit, label: 'Edit Customer', href: '#draft-invoices', navigate: 'invoices/draft' },
+        { icon: Archive, label: 'Remove Customer', href: '#paid-invoices', navigate: 'invoices/paid' },
+         { icon: Archive, label: 'Customer Groups', href: '#paid-invoices', navigate: 'get-customer-groups' },
+          { icon: Archive, label: 'Add New Customer Group', href: '#paid-invoices', navigate: 'create-customer-group' },
+             { icon: Archive, label: 'Edit Customer Group', href: '#paid-invoices', navigate: 'invoices/paid' },
       ]
     },
     { 
