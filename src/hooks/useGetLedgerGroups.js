@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchLedgerGroups } from "../../services/inventoryServices/fetchLedgerGroups";
+import { fetchLedgerGroups } from "../services/inventoryServices/fetchLedgerGroups";
 
 
 export const useGetLedgerGroups= () => {

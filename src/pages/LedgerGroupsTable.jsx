@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useGetLedgerGroups } from '../hooks/inventoryHooks/useGetLedgerGroups';
+import { useGetLedgerGroups } from '../hooks/useGetLedgerGroups';
 import { 
   FolderTree, 
   Search, 
