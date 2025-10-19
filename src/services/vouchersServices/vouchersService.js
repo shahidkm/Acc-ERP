@@ -120,7 +120,14 @@ export const getTrialBalance = async (date) => {
   
   return response.data;
 }
+export const getQuantityReport = async () => {
+  const response = await axios.get(
+    `https://localhost:7230/api/Product/api/reports/quantity`,
 
+  );
+  
+  return response.data;
+}
 
 export const getBalanceSheet = async (date) => {
   const response = await axios.get(

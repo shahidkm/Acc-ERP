@@ -22,6 +22,8 @@ import {
   Copy
 } from 'lucide-react';
 import Sidebar from "../../components/sidebar/Sidebar"
+import { useGetAccountMasters } from '../../hooks/accountHooks/accountHooks';
+import { useGetSupplierAccountMasters } from '../../hooks/customerHooks/useGetCustomers';
 const usePaymentValidation = (formData, supplierTransactions) => {
   return useMemo(() => {
     const validations = {
@@ -61,7 +63,8 @@ function SupplierPayment() {
   const [isCreating, setIsCreating] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState(null);
-  
+   const { data: accountMasters, isLoading: isLoadingAccounts, error: accountsError } = useGetAccountMasters();
+     const { data: Suppliers, isLoading: isLoadingSuppliers, error: supplierError } = useGetSupplierAccountMasters();
   const [formData, setFormData] = useState({
     pvNo: '',
     voucherType: 'CASH',
@@ -374,16 +377,24 @@ function SupplierPayment() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Credit Account <span className="text-[#dc2626]">*</span>
                 </label>
-                <input
-                  type="text"
-                  name="creditAccount"
-                  value={formData.creditAccount}
-                  onChange={handleChange}
-                  placeholder="Enter credit account"
-                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626] focus:border-[#dc2626] ${
-                    validations.creditAccount.isValid ? 'border-gray-300' : 'border-red-300'
-                  }`}
-                />
+               
+
+                 <select
+                    name="creditAccount"
+                    value={formData.creditAccount}
+                    onChange={handleChange}
+                    disabled={isLoadingAccounts}
+                    className={`w-full px-3 py-2 pr-8 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b] appearance-none bg-white ${
+                      validations.creditAccount.isValid ? 'border-gray-300' : 'border-red-300'
+                    }`}
+                  >
+                    <option value={0}> Credit Account</option>
+                    {accountMasters?.map((account) => (
+                      <option key={account.id} value={account.id}>
+                        {account.accountMasterName} ({account.accountNo})
+                      </option>
+                    ))}
+                  </select>
                 {!validations.creditAccount.isValid && (
                   <p className="mt-1 text-sm text-red-600">{validations.creditAccount.message}</p>
                 )}
@@ -509,16 +520,26 @@ function SupplierPayment() {
                 </label>
                 <div className="relative">
                   <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <input
-                    type="text"
+              
+
+ <select
                     name="supplierAccount"
                     value={formData.supplierAccount}
                     onChange={handleChange}
-                    placeholder="Enter supplier account"
-                    className={`w-full pl-9 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#dc2626] focus:border-[#dc2626] ${
+                    disabled={isLoadingAccounts}
+                    className={`w-full px-3 py-2 pr-8 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#f59e0b] focus:border-[#f59e0b] appearance-none bg-white ${
                       validations.supplierAccount.isValid ? 'border-gray-300' : 'border-red-300'
                     }`}
-                  />
+                  >
+                    <option value={0}>Select Supplier Account</option>
+                    {accountMasters?.map((account) => (
+                      <option key={account.id} value={account.id}>
+                        {account.accountMasterName} ({account.accountNo})
+                      </option>
+                    ))}
+                  </select>
+
+
                 </div>
                 {!validations.supplierAccount.isValid && (
                   <p className="mt-1 text-sm text-red-600">{validations.supplierAccount.message}</p>

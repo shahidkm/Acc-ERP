@@ -20,7 +20,7 @@ export const getInventorySubCategories = async () => {
 
 export const getInventoryUnits = async () => {
   const response = await axios.get(
-    "https://localhost:7230/api/Product/items",
+    "https://localhost:7230/api/Product/units",
 
   );
     console.log(response.data);

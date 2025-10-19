@@ -41,7 +41,7 @@ import InventoryUnitsTable from "../pages/inventoryPages/InventoryUnitsTable";
 import CreateItemMaster from "../pages/inventoryPages/CreateItemMaster";
 import InventoryItemMastersTable from "../pages/inventoryPages/InventoryItemMastersTable";
 import CreateAccountCategory from "../pages/accountPages/CreateAccountCategory";
-import AccountCategoriesTable from "../pages/accountPages/AccountCategoriesTable.JSX";
+
 import CreateAccountGroup from "../pages/accountPages/CreateAccountGroup";
 import AccountGroupsTable from "../pages/accountPages/AccountGroupTable";
 import CreateAccountMaster from "../pages/accountPages/CreateAccountMaster";
@@ -82,7 +82,7 @@ import SalesInvoiceTable from "../pages/invoicePages/SalesInvoiceTable";
 import QuotationSale from "../pages/inventoryPages/QuotationSale";
 import QuotationRental from "../pages/inventoryPages/QuotationRental";
 import QuotationSalesTable from "../pages/inventoryPages/QuotatinSalesTable";
-import QuotationRentalTable from "../pages/inventoryPages/QuotationRentalTable.JSX";
+import QuotationRentalTable from "../pages/inventoryPages/QuotationRentalTable";
 import CreateSalesOrder from "../pages/inventoryPages/CreateSalesOrder";
 import CreateDeliveryOrder from "../pages/inventoryPages/CreateDeliveryOrder";
 import SalesOrderTable from "../pages/inventoryPages/SalesOrderTable";
@@ -103,15 +103,22 @@ import CreateSalesReturn from "../pages/invoicePages/SalesReturnInvoice";
 import ContraVouchersTable from "../pages/vouchersPages/ContraVouchersTable";
 import SupplierPaymentsTable from "../pages/vouchersPages/SupplierPaymentVouchersTable";
 import CreateGoodsReceiptNote from "../pages/inventoryPages/CreateGoodsReceiptNote";
-import GoodsReceiptNotesTable from "../pages/inventoryPages/GoodsReceiptNotesTable.JSX";
+import GoodsReceiptNotesTable from "../pages/inventoryPages/GoodsReceiptNotesTable";
 import BalanceSheet from "../pages/vouchersPages/BalanceSheet.jsx";
 import CreateCheque from "../pages/vouchersPages/CreateCheque.jsx";
 import ChequesTable from "../pages/vouchersPages/ChequesTable.jsx";
-
+import AccountCategoriesTable from "../pages/accountPages/AccountCategoriesTable";
+import StockTransfer from "../pages/inventoryPages/StockTransfer.jsx";
+import Dashboard from "../pages/dashboardPages/Dashboard.jsx";
+import StockTransferOut from "../pages/inventoryPages/StockTransferOut.jsx";
+import QuantityReport from "../pages/vouchersPages/QuantityReport.jsx";
+import CustomerEnquiry from "../pages/inventoryPages/CustomerEnquiry.jsx";
+import CreateCustomerEnquiry from "../pages/inventoryPages/CreateCustomerEnquiry.jsx";
 function RouteConfig() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Dashboard />} />
         <Route path="/get-customers" element={<UserLogin />} />
         <Route path="/register" element={<UserRegister />} />
         <Route path="/send-otp" element={<SendOtp />} />
@@ -216,15 +223,20 @@ function RouteConfig() {
         <Route path="/purchase-orders" element={<PurchaseOrdersTable />} />
         <Route path="/sales-orders" element={<SalesOrdersTable />} />
         <Route path="/create-quotation-purchase" element={<QuotationPurchase />} />
-         <Route path="/trial-balance" element={<TrialBalance />} />
-          <Route path="/sales-return" element={<CreateSalesReturn />} />
-                <Route path="/contra-vouchers" element={<ContraVouchersTable />} />
-                  <Route path="/supplier-payment-vouchers" element={<SupplierPaymentsTable />} />
-                    <Route path="/create-goods-receipt-note" element={<CreateGoodsReceiptNote />} />
-                     <Route path="/goods-receipt-notes" element={<GoodsReceiptNotesTable />} />
-                       <Route path="/balance-sheet" element={<BalanceSheet />} />
-                         <Route path="/create-cheque" element={<CreateCheque />} />
-                             <Route path="/cheques" element={<ChequesTable />} />
+        <Route path="/trial-balance" element={<TrialBalance />} />
+        <Route path="/sales-return" element={<CreateSalesReturn />} />
+        <Route path="/contra-vouchers" element={<ContraVouchersTable />} />
+        <Route path="/supplier-payment-vouchers" element={<SupplierPaymentsTable />} />
+        <Route path="/create-goods-receipt-note" element={<CreateGoodsReceiptNote />} />
+        <Route path="/goods-receipt-notes" element={<GoodsReceiptNotesTable />} />
+        <Route path="/balance-sheet" element={<BalanceSheet />} />
+        <Route path="/create-cheque" element={<CreateCheque />} />
+        <Route path="/cheques" element={<ChequesTable />} />
+        <Route path="/stock-transfer-in" element={<StockTransfer />} />
+        <Route path="/stock-transfer-out" element={<StockTransferOut />} />
+        <Route path="/quantity-report" element={<QuantityReport />} />
+         <Route path="/customer-enquiries" element={<CustomerEnquiry />} />
+          <Route path="/customer-enquiry" element={<CreateCustomerEnquiry />} />
       </Routes>
     </Router>
   );

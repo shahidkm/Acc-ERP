@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCreatePurchaseInvoice } from '../../hooks/invoiceHooks.jsx/invoiceHooks';
 import { useGetAccountMasters } from '../../hooks/accountHooks/accountHooks';
 import { useGetVendors } from '../../hooks/vendorHooks/useGetVendors';
-import { useGetProducts } from '../../hooks/productHooks/useGetProducts';
+import { useGetInventoryItemMasters } from '../../hooks/inventoryHooks/useGetInventoryCategory';
 import { useGetInventoryUnits } from '../../hooks/inventoryHooks/useGetInventoryCategory';
 // import { useGetJobCodes } from '../../hooks/jobHooks/useGetJobCodes';
 import {
@@ -89,7 +89,7 @@ const CreatePurchaseInvoice = () => {
   const { mutate, isPending, isSuccess, isError, error } = useCreatePurchaseInvoice();
   const { data: accountMasters, isLoading: accountsLoading } = useGetAccountMasters();
   const { data: suppliers, isLoading: suppliersLoading } = useGetVendors();
-  const { data: products, isLoading: productsLoading } = useGetProducts();
+  const { data: products, isLoading: productsLoading } = useGetInventoryItemMasters();
   const { data: units, isLoading: unitsLoading } = useGetInventoryUnits();
   const { data: jobCodes, isLoading: jobCodesLoading } = useGetInventoryUnits();
 

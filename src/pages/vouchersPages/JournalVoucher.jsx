@@ -16,9 +16,9 @@ import {
   Plus,
   Trash2,
   Copy,
-  ChevronDown,
-  Briefcase
+  ChevronDown
 } from 'lucide-react';
+
 import { useCreateJournalVoucher } from '../../hooks/vouchersHooks/vouchersHook';
 import { useGetAccountMasters } from '../../hooks/accountHooks/accountHooks';
 import { useGetJobMasters } from '../../hooks/jobMasterHooks/jobMasterHooks';
@@ -32,7 +32,7 @@ const useVoucherValidation = (formData, entries) => {
         message: 'Voucher number is required'
       },
       entries: {
-        isValid: entries.length > 0 && entries.every(entry => 
+        isValid: entries.length > 0 && entries.every(entry =>
           entry.account.trim().length > 0 && entry.amount > 0
         ),
         message: 'All entries must have account and amount'
@@ -56,10 +56,10 @@ function JournalVoucher() {
   const createVoucherMutation = useCreateJournalVoucher();
   const { data: accountCategories, isLoading: isLoadingAccounts, error: accountsError } = useGetAccountMasters();
   const { data: jobMasters, isLoading: isLoadingJobs, error: jobsError } = useGetJobMasters();
-  
+
   const [formData, setFormData] = useState({
     voucherNo: '',
-    voucherType: 0, // Journal voucher type
+    voucherType: 0,
     voucherDate: new Date().toISOString().split('T')[0],
     remarks: ''
   });
@@ -164,12 +164,14 @@ function JournalVoucher() {
         accountId: parseInt(entry.account) || 0,
         description: entry.description,
         reference: entry.reference,
-        jobCode: entry.jobCode || '',
+        jobId: jobMasters?.find(j => j.jobCode === entry.jobCode)?.id || 0,
         costCenterCode: entry.costCenterCode || '',
         entryType: entry.type === 'debit' ? 0 : 1,
         amount: entry.amount
       }))
     };
+
+    console.log("Payload sent to API:", voucherData); // Optional: Debug log
 
     createVoucherMutation.mutate(voucherData, {
       onSuccess: () => {
@@ -197,6 +199,7 @@ function JournalVoucher() {
   const debitTotal = entries.filter(e => e.type === 'debit').reduce((sum, e) => sum + e.amount, 0);
   const creditTotal = entries.filter(e => e.type === 'credit').reduce((sum, e) => sum + e.amount, 0);
   const isBalanced = Math.abs(debitTotal - creditTotal) < 0.01;
+
 
   return (
     <div className="min-h-screen bg-white">

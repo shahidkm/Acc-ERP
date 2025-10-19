@@ -137,7 +137,7 @@ const navigate=useNavigate();
   };
 
   const handleCreateNew = () => {
-   navigate("/receipt-vouchers");
+   navigate("/receipt-voucher");
   };
 
   const handleViewDetails = (voucher) => {

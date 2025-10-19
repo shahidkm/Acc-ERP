@@ -23,8 +23,8 @@ import {
   Briefcase
 } from 'lucide-react';
 import { useGetCustomerReceiptVouchers } from '../../hooks/vouchersHooks/vouchersHook';
-
-
+import Sidebar from "../../components/sidebar/Sidebar";
+import { useNavigate } from 'react-router-dom';
 const CustomerReceiptVoucherTable = () => {
   const { data: receiptVouchers, isLoading, error } = useGetCustomerReceiptVouchers();
   const [searchTerm, setSearchTerm] = useState('');
@@ -34,7 +34,7 @@ const CustomerReceiptVoucherTable = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [statusFilter, setStatusFilter] = useState('all');
   const [selectedVoucher, setSelectedVoucher] = useState(null);
-
+const navigate=useNavigate();
   const vouchers = receiptVouchers || [];
 
   // Filter and search functionality
@@ -136,7 +136,7 @@ const CustomerReceiptVoucherTable = () => {
   };
 
   const handleCreateNew = () => {
-    console.log('Navigate to create customer receipt voucher');
+    navigate("/customer-receipt-voucher");
   };
 
   const handleViewDetails = (voucher) => {
@@ -179,6 +179,7 @@ const CustomerReceiptVoucherTable = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
+      <Sidebar/>
       <div className="max-w-full mx-auto">
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

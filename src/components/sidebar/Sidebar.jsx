@@ -1,76 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  Home,
-  Receipt,
-  TrendingUp,
-  Users,
-  CreditCard,
-  FileText,
-  Settings,
-  Menu,
-  X,
-  DollarSign,
-  PieChart,
-  Calculator,
-  Building,
-  ChevronDown,
-  ChevronRight,
-  BarChart3,
-  Calendar,
-  Eye,
-  Plus,
-  Edit,
-  Archive,
-  UserPlus,
-  MessageSquare,
-  FileBarChart,
-  Wallet,
-  Banknote,
-  TrendingDown,
-  Shield,
-  Bell,
-  User,
-  Palette,
-  Database,
-  Package,
-  ShoppingCart,
-  Truck,
-  FileInput,
-  FileOutput,
-  ArrowUpRight,
-  ArrowDownLeft,
-  Wallet as CreditCardIcon,
-  BookOpen,
-  Users2,
-  Building2,
-  Briefcase,
-  Target,
-  Activity,
-  Layers,
-  Grid3x3,
-  Package2,
-  Tags,
-  Boxes,
-  ClipboardList,
-  ShoppingBag,
-  FileCheck,
-  RotateCcw,
-  ArrowUpDown,
-  GitBranch,
-  Factory,
-  MapPin,
-  ArrowLeft
+  Home, Receipt, TrendingUp, Users, CreditCard, FileText, Settings,
+  Menu, X, DollarSign, PieChart, Calculator, Building, ChevronDown,
+  ChevronRight, BarChart3, Calendar, Eye, Plus, Edit, Archive,
+  UserPlus, MessageSquare, FileBarChart, Wallet, Banknote, TrendingDown,
+  Shield, Bell, User, Palette, Database, Package, ShoppingCart, Truck,
+  FileInput, FileOutput, ArrowUpRight, ArrowDownLeft,
+  Wallet as CreditCardIcon, BookOpen, Users2, Building2, Briefcase,
+  Target, Activity, Layers, Grid3x3, Package2, Tags, Boxes,
+  ClipboardList, ShoppingBag, FileCheck, RotateCcw, ArrowUpDown,
+  GitBranch, Factory, MapPin, ArrowLeft
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import {
+  setSubModule,
+  setMainModule,
+  setActiveModules,
+  setExpandedModules,
+  toggleModule
+} from "../../redux/slices/sidebar";
+
 export default function EnhancedSidebar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [expandedModules, setExpandedModules] = useState({});
-  const [activeMainModule, setActiveMainModule] = useState('Dashboard');
-  const [activeSubModule, setActiveSubModule] = useState('Overview');
-  const [showSubSidebar, setShowSubSidebar] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  // Consistent width for both sidebars
-  const SIDEBAR_WIDTH = 'w-72'; // 288px
+
+  // Get state from Redux
+  const { SubModule, MainModule, expandedModules } = useSelector(state => state.sidebar);
+
+  // Local state only for mobile menu
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const SIDEBAR_WIDTH = 'w-72';
 
   const menuItems = [
     {
@@ -78,10 +39,8 @@ export default function EnhancedSidebar() {
       label: 'Dashboard',
       color: '#3b82f6',
       subItems: [
-        { icon: Eye, label: 'Overview', href: '#overview', navigate: 'register' },
-        { icon: BarChart3, label: 'Analytics', href: '#analytics', navigate: 'dashboard/analytics' },
-        { icon: Calendar, label: 'Calendar', href: '#calendar', navigate: 'dashboard/calendar' },
-        { icon: Bell, label: 'Notifications', href: '#notifications', navigate: 'dashboard/notifications' }
+        { icon: Eye, label: 'Overview', href: '#overview', navigate: ' ' },
+      
       ]
     },
     {
@@ -95,7 +54,6 @@ export default function EnhancedSidebar() {
         { icon: Plus, label: 'Account Enquiry', href: '#add-account', navigate: 'account-enquiry' },
         { icon: Plus, label: 'Address List', href: '#add-account', navigate: 'address-list' },
         { icon: Plus, label: 'Reconciliation', href: '#add-account', navigate: 'reconciliation' }
-
       ]
     },
     {
@@ -132,22 +90,21 @@ export default function EnhancedSidebar() {
         { icon: Truck, label: 'Goods Receipt Note', href: '#add-account', navigate: 'goods-receipt-notes' },
         { icon: FileCheck, label: 'Purchase Invoice', href: '#add-account', navigate: 'get-purchase-invoices' },
         { icon: RotateCcw, label: 'Purchase Return', href: '#add-account', navigate: 'get-purchase-return-invoices' },
-        { icon: MessageSquare, label: 'Customer Enquiry', href: '#add-account', navigate: 'get-customers' },
+        { icon: MessageSquare, label: 'Customer Enquiry', href: '#add-account', navigate: 'customer-enquiries' },
         { icon: FileText, label: 'Quotation Sales', href: '#add-account', navigate: 'quotation-sales' },
         { icon: Building, label: 'Quotation Rental', href: '#add-account', navigate: 'quotation-rental' },
         { icon: ShoppingBag, label: 'Sales Order', href: '#add-account', navigate: 'sales-orders' },
         { icon: Truck, label: 'Delivery Order', href: '#add-account', navigate: 'create-delivery-order' },
         { icon: Receipt, label: 'Sales Invoice', href: '#add-account', navigate: 'sales-vouchers' },
         { icon: RotateCcw, label: 'Sales Return', href: '#add-account', navigate: 'sales-return' },
-        { icon: ArrowUpRight, label: 'Stock Transfer in', href: '#add-account', navigate: 'accounts/add-account' },
-        { icon: ArrowDownLeft, label: 'Stock Transfer out', href: '#add-account', navigate: 'accounts/add-account' },
+        { icon: ArrowUpRight, label: 'Stock Transfer in', href: '#add-account', navigate: 'stock-transfer-in' },
+        { icon: ArrowDownLeft, label: 'Stock Transfer out', href: '#add-account', navigate: 'stock-transfer-out' },
         { icon: FileOutput, label: 'Goods Issued Note', href: '#add-account', navigate: 'accounts/add-account' },
         { icon: RotateCcw, label: 'Goods Return', href: '#add-account', navigate: 'accounts/add-account' },
         { icon: Factory, label: 'Manufacture Voucher', href: '#add-account', navigate: 'accounts/add-account' },
         { icon: MapPin, label: 'Location Transfer', href: '#add-account', navigate: 'accounts/add-account' },
       ]
     },
-
     {
       icon: ShoppingCart,
       label: 'Transactions',
@@ -174,158 +131,27 @@ export default function EnhancedSidebar() {
         { icon: CreditCard, label: 'Voucherwise Report', href: '#paid-invoices', navigate: 'voucher-reports' },
         { icon: FileCheck, label: 'Account Statement', href: '#paid-invoices', navigate: 'account-enquiry' },
         { icon: BarChart3, label: 'Trial Balance', href: '#paid-invoices', navigate: 'trial-balance' },
-         { icon: BarChart3, label: 'Balance Sheet', href: '#paid-invoices', navigate: 'balance-sheet' }
-      ]
-    },
-    {
-      icon: ArrowUpRight,
-      label: 'Receipt',
-      color: '#16a34a',
-      subItems: [
-        { icon: Receipt, label: 'Receipt Voucher', href: '#paid-invoices', navigate: 'receipt-voucher' },
-        { icon: FileCheck, label: 'History', href: '#paid-invoices', navigate: 'invoices/paid' },
-        { icon: BarChart3, label: 'Reports', href: '#paid-invoices', navigate: 'invoices/paid' },
-      ]
-    },
-    {
-      icon: BookOpen,
-      label: 'Ledger',
-      color: '#6366f1',
-      subItems: [
-        { icon: Eye, label: 'Ledgers', href: '#new-transaction', navigate: 'get-ledgers' },
-        { icon: Layers, label: 'Ledger Groups', href: '#new-transaction', navigate: 'get-ledger-groups' },
-        { icon: Plus, label: 'Create Ledger Group', href: '#all-transactions', navigate: 'create-ledger-group' },
-        { icon: Plus, label: 'Create Ledger', href: '#all-transactions', navigate: 'create-ledger' },
-        { icon: Edit, label: 'Edit Ledger', href: '#pending-transactions', navigate: 'edit-ledger' },
-        { icon: Archive, label: 'Archive', href: '#transaction-history', navigate: 'get-ledger-groups' },
-      ]
-    },
-    {
-      icon: Users,
-      label: 'Customer',
-      color: '#06b6d4',
-      subItems: [
-        { icon: Eye, label: 'Customers', href: '#create-invoice', navigate: 'get-customers' },
-        { icon: UserPlus, label: 'Add New Customer', href: '#all-invoices', navigate: 'create-customer' },
-        { icon: Edit, label: 'Edit Customer', href: '#draft-invoices', navigate: 'invoices/draft' },
-        { icon: Archive, label: 'Remove Customer', href: '#paid-invoices', navigate: 'invoices/paid' },
-        { icon: Users2, label: 'Customer Groups', href: '#paid-invoices', navigate: 'get-customer-groups' },
-        { icon: Plus, label: 'Add Customer Group', href: '#paid-invoices', navigate: 'create-customer-group' },
-      ]
-    },
-    {
-      icon: Briefcase,
-      label: 'Vendor',
-      color: '#7c3aed',
-      subItems: [
-        { icon: Eye, label: 'Vendors', href: '#create-invoice', navigate: 'get-vendors' },
-        { icon: UserPlus, label: 'Add New Vendor', href: '#all-invoices', navigate: 'create-customer' },
-        { icon: Edit, label: 'Edit Vendor', href: '#draft-invoices', navigate: 'invoices/draft' },
-        { icon: Archive, label: 'Remove Vendor', href: '#paid-invoices', navigate: 'invoices/paid' },
-        { icon: Users2, label: 'Vendor Groups', href: '#paid-invoices', navigate: 'get-customer-groups' },
-        { icon: Plus, label: 'Add Vendor Group', href: '#paid-invoices', navigate: 'create-customer-group' },
-      ]
-    },
-    {
-      icon: TrendingDown,
-      label: 'Expenses',
-      color: '#f97316',
-      subItems: [
-        { icon: Plus, label: 'Add Expense', href: '#add-expense', navigate: 'expenses/add' },
-        { icon: Eye, label: 'View Expenses', href: '#view-expenses', navigate: 'expenses/view' },
-        { icon: Receipt, label: 'Receipts', href: '#receipts', navigate: 'expenses/receipts' },
-        { icon: Tags, label: 'Categories', href: '#expense-categories', navigate: 'expenses/categories' }
-      ]
-    },
-    {
-      icon: FileBarChart,
-      label: 'Reports',
-      color: '#14b8a6',
-      subItems: [
-        { icon: FileBarChart, label: 'Financial Reports', href: '#financial-reports', navigate: 'reports/financial' },
-        { icon: PieChart, label: 'Profit & Loss', href: '#profit-loss', navigate: 'reports/profit-loss' },
-        { icon: BarChart3, label: 'Cash Flow', href: '#cash-flow', navigate: 'reports/cash-flow' },
-        { icon: Calculator, label: 'Tax Reports', href: '#tax-reports', navigate: 'reports/tax' }
-      ]
-    },
-    {
-      icon: Activity,
-      label: 'Analytics',
-      color: '#ec4899',
-      subItems: [
-        { icon: TrendingUp, label: 'Revenue Trends', href: '#revenue-trends', navigate: 'analytics/revenue-trends' },
-        { icon: BarChart3, label: 'Expense Analysis', href: '#expense-analysis', navigate: 'analytics/expense-analysis' },
-        { icon: Target, label: 'Performance', href: '#performance', navigate: 'analytics/performance' },
-        { icon: Calendar, label: 'Forecasting', href: '#forecasting', navigate: 'analytics/forecasting' }
-      ]
-    },
-    {
-      icon: Users2,
-      label: 'Clients',
-      color: '#0ea5e9',
-      subItems: [
-        { icon: Eye, label: 'All Clients', href: '#all-clients', navigate: 'clients/all' },
-        { icon: UserPlus, label: 'Add Client', href: '#add-client', navigate: 'clients/add' },
-        { icon: MessageSquare, label: 'Communications', href: '#communications', navigate: 'clients/communications' },
-        { icon: FileText, label: 'Client Reports', href: '#client-reports', navigate: 'clients/reports' }
-      ]
-    },
-    {
-      icon: Calculator,
-      label: 'Tax Center',
-      color: '#84cc16',
-      subItems: [
-        { icon: FileText, label: 'Tax Returns', href: '#tax-returns', navigate: 'tax/returns' },
-        { icon: Calendar, label: 'Tax Calendar', href: '#tax-calendar', navigate: 'tax/calendar' },
-        { icon: Calculator, label: 'Calculations', href: '#tax-calculations', navigate: 'tax/calculations' },
-        { icon: Archive, label: 'Archived Returns', href: '#archived-returns', navigate: 'tax/archived' }
-      ]
-    },
-    {
-      icon: Building,
-      label: 'Assets',
-      color: '#64748b',
-      subItems: [
-        { icon: Eye, label: 'Fixed Assets', href: '#fixed-assets', navigate: 'assets/fixed' },
-        { icon: TrendingDown, label: 'Depreciation', href: '#depreciation', navigate: 'assets/depreciation' },
-        { icon: Plus, label: 'Add Asset', href: '#add-asset', navigate: 'assets/add' },
-        { icon: FileText, label: 'Asset Reports', href: '#asset-reports', navigate: 'assets/reports' }
-      ]
-    },
-    {
-      icon: Settings,
-      label: 'Settings',
-      color: '#6b7280',
-      subItems: [
-        { icon: User, label: 'Profile', href: '#profile', navigate: 'settings/profile' },
-        { icon: Shield, label: 'Security', href: '#security', navigate: 'settings/security' },
-        { icon: Palette, label: 'Preferences', href: '#preferences', navigate: 'settings/preferences' },
-        { icon: Database, label: 'Backup', href: '#backup', navigate: 'settings/backup' }
+        { icon: BarChart3, label: 'Balance Sheet', href: '#paid-invoices', navigate: 'balance-sheet' },
+         { icon: BarChart3, label: 'Quantity Report', href: '#paid-invoices', navigate: 'quantity-report' }
       ]
     }
   ];
 
-  const handleToggleModule = (moduleLabel) => {
-    setExpandedModules(prev => ({
-      ...prev,
-      [moduleLabel]: !prev[moduleLabel]
-    }));
-  };
-
   const handleMainModuleClick = (moduleLabel) => {
-    setActiveMainModule(moduleLabel);
-    setShowSubSidebar(true);
-    setActiveSubModule(null);
+    dispatch(setMainModule(moduleLabel));
+    dispatch(setSubModule(null));
   };
 
   const handleBackToMain = () => {
-    setShowSubSidebar(false);
-    setActiveSubModule(null);
+    dispatch(setMainModule(null));
+    dispatch(setSubModule(null));
   };
 
   const handleSubItemClick = (subItem, mainModuleLabel) => {
-    setActiveMainModule(mainModuleLabel);
-    setActiveSubModule(subItem.label);
+    dispatch(setActiveModules({
+      mainModule: mainModuleLabel,
+      subModule: subItem.label
+    }));
     setIsOpen(false);
 
     if (subItem.navigate) {
@@ -333,7 +159,8 @@ export default function EnhancedSidebar() {
     }
   };
 
-  const currentModule = menuItems.find(item => item.label === activeMainModule);
+  const currentModule = menuItems.find(item => item.label === MainModule);
+  const showSubSidebar = !!MainModule;
 
   return (
     <>
@@ -363,7 +190,7 @@ export default function EnhancedSidebar() {
         </div>
       </button>
 
-      {/* Main Sidebar - Only show when sub-sidebar is closed */}
+      {/* Main Sidebar */}
       {!showSubSidebar && (
         <div
           className={`
@@ -400,7 +227,7 @@ export default function EnhancedSidebar() {
             <div className="space-y-1">
               {menuItems.map((item, index) => {
                 const IconComponent = item.icon;
-                const isMainModuleActive = activeMainModule === item.label;
+                const isMainModuleActive = MainModule === item.label;
 
                 return (
                   <div key={index} className="mb-2">
@@ -429,8 +256,7 @@ export default function EnhancedSidebar() {
                     >
                       <IconComponent
                         size={20}
-                        className={`transition-colors duration-200 ${isMainModuleActive ? 'text-white' : 'text-gray-400'
-                          }`}
+                        className={`transition-colors duration-200 ${isMainModuleActive ? 'text-white' : 'text-gray-400'}`}
                         style={{ color: isMainModuleActive ? 'white' : item.color }}
                       />
                       <span className="font-medium text-sm flex-1 text-left">{item.label}</span>
@@ -439,8 +265,7 @@ export default function EnhancedSidebar() {
                       )}
                       <ChevronRight
                         size={16}
-                        className={`transition-transform duration-200 ${isMainModuleActive ? 'text-white' : 'text-gray-400'
-                          }`}
+                        className={`transition-transform duration-200 ${isMainModuleActive ? 'text-white' : 'text-gray-400'}`}
                       />
                     </button>
                   </div>
@@ -468,7 +293,7 @@ export default function EnhancedSidebar() {
         </div>
       )}
 
-      {/* Sub-navigation Sidebar - Only show when a module is selected */}
+      {/* Sub-navigation Sidebar */}
       {showSubSidebar && currentModule && (
         <div
           className={`
@@ -517,7 +342,7 @@ export default function EnhancedSidebar() {
             <div className="space-y-1">
               {currentModule.subItems.map((subItem, subIndex) => {
                 const SubIconComponent = subItem.icon;
-                const isSubItemActive = activeSubModule === subItem.label && activeMainModule === currentModule.label;
+                const isSubItemActive = SubModule === subItem.label && MainModule === currentModule.label;
 
                 return (
                   <button
@@ -546,8 +371,7 @@ export default function EnhancedSidebar() {
                   >
                     <SubIconComponent
                       size={18}
-                      className={`transition-colors duration-200 ${isSubItemActive ? 'text-white' : 'text-gray-500'
-                        }`}
+                      className={`transition-colors duration-200 ${isSubItemActive ? 'text-white' : 'text-gray-500'}`}
                       style={{ color: isSubItemActive ? 'white' : currentModule.color }}
                     />
                     <span className="font-medium text-sm">{subItem.label}</span>

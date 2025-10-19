@@ -26,8 +26,8 @@ import {
 import { useGetAccountMasters } from '../../hooks/accountHooks/accountHooks';
 import { useGetJobMasters } from '../../hooks/jobMasterHooks/jobMasterHooks';
 import { useGetSalesmans } from '../../hooks/salesmanHooks/salesmanHooks';
-import { useGetCustomers } from '../../hooks/customerHooks/useGetCustomers';
-
+import { useGetCustomerAccountMasters } from '../../hooks/customerHooks/useGetCustomers';
+import Sidebar from "../../components/sidebar/Sidebar";
 const useReceiptValidation = (formData, customerTransactions) => {
   return useMemo(() => {
     const validations = {
@@ -67,7 +67,7 @@ function CustomerReceipt() {
   const { data: accountMasters, isLoading: isLoadingAccounts, error: accountsError } = useGetAccountMasters();
   const { data: jobMasters, isLoading: isLoadingJobs, error: jobsError } = useGetJobMasters();
   const { data: salesmen, isLoading: isLoadingSalesmen, error: salesmenError } = useGetSalesmans();
-  const { data: customers, isLoading: isLoadingCustomers, error: customersError } = useGetCustomers();
+  const { data: customers, isLoading: isLoadingCustomers, error: customersError } = useGetCustomerAccountMasters();
   
   const [isCreating, setIsCreating] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -242,7 +242,7 @@ function CustomerReceipt() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
+      <Sidebar/>
       <div className="bg-white border-b border-gray-200 px-6 py-6">
         <div className="max-w-6xl mx-auto">
           <button
@@ -601,8 +601,8 @@ function CustomerReceipt() {
                   >
                     <option value={0}>Select Customer</option>
                     {customers?.map((customer) => (
-                      <option key={customer.customerId} value={customer.customerId}>
-                        {customer.name} - {customer.phone}
+                      <option key={customer.id} value={customer.id}>
+                        {customer.accountMasterName} - {customer.accountId}
                       </option>
                     ))}
                   </select>

@@ -1,5 +1,5 @@
         import { useMutation,useQuery } from "@tanstack/react-query";
-       import { createVoucher,getVouchers,getCheques,createCheque,getBalanceSheet,getSupplierPaymentVouchers,getContraVouchers,getTrialBalance,getCustomerReceiptVouchers,createSalesNonStockVoucher,getSalesNonStockVouchers,getPurchaseNonStockVouchers,createPurchaseNonStockVoucher,createPaymentVoucher,getPaymentVouchers,getReceiptVouchers,getJournalVouchers,createJournalVoucher } from "../../services/vouchersServices/vouchersService";
+       import { createVoucher,getVouchers,getQuantityReport,getCheques,createCheque,getBalanceSheet,getSupplierPaymentVouchers,getContraVouchers,getTrialBalance,getCustomerReceiptVouchers,createSalesNonStockVoucher,getSalesNonStockVouchers,getPurchaseNonStockVouchers,createPurchaseNonStockVoucher,createPaymentVoucher,getPaymentVouchers,getReceiptVouchers,getJournalVouchers,createJournalVoucher } from "../../services/vouchersServices/vouchersService";
     
         export const useCreateVoucher=()=>{
             return useMutation({
@@ -116,6 +116,14 @@
         queryFn:()=> getTrialBalance(date),
       });
     };
+
+             export const useGetQuantityReport= () => {
+      return useQuery({
+        queryKey: ["getQuantityReport"],
+        queryFn: getQuantityReport,
+      });
+    };
+
 
     
            export const useGetBalanceSheet= (date) => {

@@ -1,24 +1,19 @@
 import React, { useState } from 'react';
 import { Save, Package, Loader2, ArrowLeft, Ruler } from 'lucide-react';
 import Sidebar from "../../src/components/sidebar/Sidebar"
+;import { useCreateInventoryUnit } from '../hooks/inventoryHooks/useCreateInventoryCategory';
+import { useNavigate } from 'react-router-dom';
+
 function CreateUnit() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         description: '',
         fraCount: 0,
     });
 
-    // Mock mutation for demo
-    const createUnitMutation = {
-        isPending: false,
-        isSuccess: false,
-        isError: false,
-        mutate: (data, callbacks) => {
-            console.log('Creating unit:', data);
-            // Simulate success
-            setTimeout(() => callbacks.onSuccess(), 1000);
-        }
-    };
+    // Use the actual hook
+    const { mutate: createUnit, isPending, isSuccess, isError, error } = useCreateInventoryUnit();
 
     const handleChange = (e) => {
         const { name, value, type } = e.target;
@@ -31,9 +26,11 @@ function CreateUnit() {
     const handleSubmit = () => {
         if (!formData.name.trim()) return;
 
-        createUnitMutation.mutate(formData, {
+        createUnit(formData, {
             onSuccess: () => {
                 setFormData({ name: '', description: '', fraCount: 0 });
+                // Optionally navigate back to units list
+                // navigate('/inventory-units');
             },
             onError: (error) => {
                 console.error("Error creating unit:", error);
@@ -42,7 +39,7 @@ function CreateUnit() {
     };
 
     const handleGoBack = () => {
-        console.log('Go back to inventory units');
+        navigate('/inventory-units');
     };
 
     return (
@@ -167,6 +164,9 @@ function CreateUnit() {
                                                     {formData.description}
                                                 </div>
                                             )}
+                                            <div className="text-xs text-gray-500 mt-1">
+                                                Fra Count: {formData.fraCount}
+                                            </div>
                                         </div>
                                         <div className="ml-4">
                                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
@@ -216,14 +216,14 @@ function CreateUnit() {
                             </button>
                             <button
                                 onClick={handleSubmit}
-                                disabled={createUnitMutation.isPending || !formData.name.trim()}
+                                disabled={isPending || !formData.name.trim()}
                                 className={`inline-flex items-center gap-2 px-6 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                                    createUnitMutation.isPending || !formData.name.trim()
+                                    isPending || !formData.name.trim()
                                         ? 'bg-gray-400 text-white cursor-not-allowed'
                                         : 'bg-orange-500 text-white hover:bg-orange-600 focus:ring-orange-500 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
                                 }`}
                             >
-                                {createUnitMutation.isPending ? (
+                                {isPending ? (
                                     <>
                                         <Loader2 className="w-4 h-4 animate-spin" />
                                         Creating...
@@ -240,7 +240,7 @@ function CreateUnit() {
                 </div>
 
                 {/* Success/Error Messages */}
-                {createUnitMutation.isSuccess && (
+                {isSuccess && (
                     <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
                         <div className="flex items-center">
                             <div className="w-4 h-4 bg-green-500 rounded-full mr-3"></div>
@@ -249,12 +249,12 @@ function CreateUnit() {
                     </div>
                 )}
 
-                {createUnitMutation.isError && (
+                {isError && (
                     <div className="mt-6 bg-red-50 border border-red-200 rounded-lg p-4">
                         <div className="flex items-center">
                             <div className="w-4 h-4 bg-red-500 rounded-full mr-3"></div>
                             <p className="text-red-800 font-medium">
-                                Error creating unit. Please try again.
+                                Error creating unit: {error?.message || 'Please try again.'}
                             </p>
                         </div>
                     </div>

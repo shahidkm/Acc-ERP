@@ -66,7 +66,6 @@ const CreateJobMaster = () => {
   const { data: customers, isLoading: customersLoading } = useGetCustomers();
   const { data: salesmen, isLoading: salesmenLoading } = useGetSalesmans();
 
-  // Common ports for dropdowns
   const commonPorts = [
     'Dubai (DXB)', 'Jebel Ali (JA)', 'Abu Dhabi (AUH)', 'Sharjah (SHJ)',
     'Mumbai (BOM)', 'Chennai (MAA)', 'Delhi (DEL)', 'Kolkata (CCU)',
@@ -87,8 +86,8 @@ const CreateJobMaster = () => {
     
     const submitData = {
       ...formData,
-        customerId: parseInt(formData.customerId),
-          salesmanId: parseInt(formData.salesmanId),
+      customerId: parseInt(formData.customerId),
+      salesmanId: parseInt(formData.salesmanId),
       noOfPieces: parseInt(formData.noOfPieces) || 0,
       grossWeight: parseFloat(formData.grossWeight) || 0,
       chargeableWeight: parseFloat(formData.chargeableWeight) || 0,
@@ -186,7 +185,7 @@ const CreateJobMaster = () => {
                   />
                 </div>
 
-                {/* Customer */}
+                {/* Customer - FIXED */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <User className="h-4 w-4 text-[#f29f67]" />
@@ -194,7 +193,7 @@ const CreateJobMaster = () => {
                   </label>
                   <select
                     value={formData.customerId}
-                    onChange={(e) => handleInputChange('customer', e.target.value)}
+                    onChange={(e) => handleInputChange('customerId', e.target.value)}
                     required
                     disabled={customersLoading}
                     className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-[#f29f67]/20 focus:border-[#f29f67] transition-all duration-300 disabled:opacity-50"
@@ -208,7 +207,7 @@ const CreateJobMaster = () => {
                   </select>
                 </div>
 
-                {/* Salesman */}
+                {/* Salesman - FIXED */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Users className="h-4 w-4 text-[#f29f67]" />
@@ -216,7 +215,7 @@ const CreateJobMaster = () => {
                   </label>
                   <select
                     value={formData.salesmanId}
-                    onChange={(e) => handleInputChange('salesman', e.target.value)}
+                    onChange={(e) => handleInputChange('salesmanId', e.target.value)}
                     disabled={salesmenLoading}
                     className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-[#f29f67]/20 focus:border-[#f29f67] transition-all duration-300 disabled:opacity-50"
                   >
@@ -256,7 +255,6 @@ const CreateJobMaster = () => {
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* MBL/MAWB */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <FileCheck className="h-4 w-4 text-[#f29f67]" />
@@ -271,7 +269,6 @@ const CreateJobMaster = () => {
                   />
                 </div>
 
-                {/* HBL/HAWB */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <FileCheck className="h-4 w-4 text-[#f29f67]" />
@@ -286,7 +283,6 @@ const CreateJobMaster = () => {
                   />
                 </div>
 
-                {/* Flight/Vessel/Voyage */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Plane className="h-4 w-4 text-[#f29f67]" />
@@ -301,7 +297,6 @@ const CreateJobMaster = () => {
                   />
                 </div>
 
-                {/* BE Number */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Hash className="h-4 w-4 text-[#f29f67]" />
@@ -316,7 +311,6 @@ const CreateJobMaster = () => {
                   />
                 </div>
 
-                {/* Container Number */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Container className="h-4 w-4 text-[#f29f67]" />
@@ -343,7 +337,6 @@ const CreateJobMaster = () => {
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {/* Load Port */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Ship className="h-4 w-4 text-[#f29f67]" />
@@ -361,7 +354,6 @@ const CreateJobMaster = () => {
                   </select>
                 </div>
 
-                {/* Discharge Port */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Ship className="h-4 w-4 text-[#f29f67]" />
@@ -379,7 +371,6 @@ const CreateJobMaster = () => {
                   </select>
                 </div>
 
-                {/* Port of Receipt */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-[#f29f67]" />
@@ -397,7 +388,6 @@ const CreateJobMaster = () => {
                   </select>
                 </div>
 
-                {/* Port of Delivery */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-[#f29f67]" />
@@ -427,7 +417,6 @@ const CreateJobMaster = () => {
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {/* Number of Pieces */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Package className="h-4 w-4 text-[#f29f67]" />
@@ -443,7 +432,6 @@ const CreateJobMaster = () => {
                   />
                 </div>
 
-                {/* Gross Weight */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Weight className="h-4 w-4 text-[#f29f67]" />
@@ -460,7 +448,6 @@ const CreateJobMaster = () => {
                   />
                 </div>
 
-                {/* Chargeable Weight */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Weight className="h-4 w-4 text-[#f29f67]" />
@@ -489,7 +476,6 @@ const CreateJobMaster = () => {
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Shipper */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Truck className="h-4 w-4 text-[#f29f67]" />
@@ -504,7 +490,6 @@ const CreateJobMaster = () => {
                   />
                 </div>
 
-                {/* Consignee */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Building className="h-4 w-4 text-[#f29f67]" />
@@ -531,7 +516,6 @@ const CreateJobMaster = () => {
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Open Cost */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Target className="h-4 w-4 text-[#f29f67]" />
@@ -549,7 +533,6 @@ const CreateJobMaster = () => {
                   <p className="mt-1 text-xs text-gray-500">Expected cost for the job</p>
                 </div>
 
-                {/* Open Income */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <TrendingUp className="h-4 w-4 text-[#f29f67]" />
@@ -567,7 +550,6 @@ const CreateJobMaster = () => {
                   <p className="mt-1 text-xs text-gray-500">Expected revenue from the job</p>
                 </div>
 
-                {/* Contract Amount */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <DollarSign className="h-4 w-4 text-[#f29f67]" />
@@ -586,7 +568,6 @@ const CreateJobMaster = () => {
                 </div>
               </div>
 
-              {/* Financial Summary */}
               {(formData.openCost > 0 || formData.openIncome > 0 || formData.contractAmount > 0) && (
                 <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
                   <h4 className="text-sm font-semibold text-blue-900 mb-3">Financial Summary</h4>
@@ -630,7 +611,6 @@ const CreateJobMaster = () => {
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Start Date */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-[#f29f67]" />
@@ -645,7 +625,6 @@ const CreateJobMaster = () => {
                   />
                 </div>
 
-                {/* End Date */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-[#f29f67]" />
@@ -661,7 +640,6 @@ const CreateJobMaster = () => {
                   <p className="mt-1 text-xs text-gray-500">Leave blank if job is ongoing</p>
                 </div>
 
-                {/* Job Status */}
                 <div className="group">
                   <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
                     <Archive className="h-4 w-4 text-[#f29f67]" />
@@ -684,7 +662,6 @@ const CreateJobMaster = () => {
                 </div>
               </div>
 
-              {/* Timeline Summary */}
               {formData.startDate && formData.endDate && (
                 <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200">
                   <h4 className="text-sm font-semibold text-green-900 mb-2">Timeline Information</h4>
@@ -721,7 +698,7 @@ const CreateJobMaster = () => {
                   {formData.jobCode || 'Not set'} - {formData.jobName || 'Unnamed Job'}
                 </p>
                 <p className="text-xs text-blue-600">
-                  Customer: {formData.customer || 'Not selected'}
+                  Customer: {customers?.find(c => c.customerId === parseInt(formData.customerId))?.name || 'Not selected'}
                 </p>
               </div>
               <div className="bg-white/50 rounded-lg p-4">
@@ -758,8 +735,8 @@ const CreateJobMaster = () => {
                 </button>
                 <button
                   type="submit"
-                  disabled={isPending || !formData.jobCode || !formData.jobName || !formData.customer}
-                  className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-[#f29f67] to-[#e8935c] text-white font-semibold rounded-xl hover:from-[#e8935c] to-[#d17d4a] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  disabled={isPending || !formData.jobCode || !formData.jobName || !formData.customerId}
+                  className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-[#f29f67] to-[#e8935c] text-white font-semibold rounded-xl hover:from-[#e8935c] hover:to-[#d17d4a] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
                   {isPending ? (
                     <>
@@ -793,7 +770,7 @@ const CreateJobMaster = () => {
               </div>
             )}
 
-            {/* {isError && (
+            {isError && (
               <div className="bg-red-50 border border-red-200 rounded-xl p-4 shadow-lg">
                 <div className="flex items-center gap-3 text-red-700">
                   <AlertCircle className="h-6 w-6" />
@@ -803,7 +780,7 @@ const CreateJobMaster = () => {
                   </div>
                 </div>
               </div>
-            )} */}
+            )}
           </div>
         )}
       </div>

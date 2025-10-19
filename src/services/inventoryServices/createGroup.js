@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const createGroup = async (data) => {
-  const response = await axios.post("https://localhost:7230/api/Product/groups", data);
+  const response = await axios.post("https://localhost:7230/api/Product/group", data);
   return response;
 };
 
@@ -43,6 +43,17 @@ export const getQuotationRentals = async () => {
 
 export const createSalesOrder = async (data) => {
   const response = await axios.post("https://localhost:7230/api/Product/SalesOrders", data);
+  return response;
+};
+
+
+export const createStockTransferIn = async (data) => {
+  const response = await axios.post("https://localhost:7230/api/StockTransfers/in", data);
+  return response;
+};
+
+export const createStockTransferOut= async (data) => {
+  const response = await axios.post("https://localhost:7230/api/StockTransfers/out", data);
   return response;
 };
 

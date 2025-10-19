@@ -1,5 +1,5 @@
     import { useMutation } from "@tanstack/react-query";
-    import { createGroup,createPurchaseOrder,getGoodsReceiptNotes,getPurchaseOrders,createItemMaster,createQuotationRental,createQuotationSale,getQuotationSales,getQuotationRentals,getSalesOrders,createSalesOrder,createSubGroup } from "../../services/inventoryServices/createGroup";
+    import { createGroup,createPurchaseOrder,getGoodsReceiptNotes,createStockTransferOut,createStockTransferIn,getPurchaseOrders,createItemMaster,createQuotationRental,createQuotationSale,getQuotationSales,getQuotationRentals,getSalesOrders,createSalesOrder,createSubGroup } from "../../services/inventoryServices/createGroup";
 import { useQuery } from "@tanstack/react-query";
     export const useCreateInventoryGroup=()=>{
         return useMutation({
@@ -89,5 +89,19 @@ import { useQuery } from "@tanstack/react-query";
             export const useCreateDeliveryOrder=()=>{
         return useMutation({
             mutationFn:createSalesOrder
+        })
+    }
+
+
+            export const useCreateStockTransferIn=()=>{
+        return useMutation({
+            mutationFn:createStockTransferIn
+        })
+    }
+
+    
+            export const useCreateStockTransferOut=()=>{
+        return useMutation({
+            mutationFn:createStockTransferOut
         })
     }
